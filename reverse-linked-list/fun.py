@@ -18,7 +18,7 @@ class ListNode:
 class Solution:
     """_summary_"""
 
-    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    def reverseList0(self, head: Optional[ListNode]) -> Optional[ListNode]:
         """_summary_
 
         Args:
@@ -40,3 +40,54 @@ class Solution:
             return prev_node
         else:
             return None
+
+    def reverseList1(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        """_summary_
+
+        Args:
+            head (Optional[ListNode]): _description_
+
+        Returns:
+            Optional[ListNode]: _description_
+        """
+        try:
+            prev = None
+            temp = head.next
+
+            while temp:
+                head.next = prev
+                prev, head = head, temp
+                temp = head.next
+            head.next = prev
+            return head
+        except AttributeError:
+            return head
+
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        """_summary_
+
+        Args:
+            head (Optional[ListNode]): _description_
+
+        Returns:
+            Optional[ListNode]: _description_
+        """
+        try:
+            if head.next:
+                temp = self.reverseList(head.next)
+                # print(head.val)
+                # print(temp.val)
+                head.next = None
+                temp.next = head
+
+            # print("--debug--")
+            # curr_node = head
+            # while curr_node is not None:
+            #     print(curr_node.val)
+            #     curr_node = curr_node.next
+            # print("-----")
+
+            return head
+
+        except AttributeError:
+            return head
